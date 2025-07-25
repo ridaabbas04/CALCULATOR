@@ -1,0 +1,50 @@
+﻿from tkinter import *
+window = Tk()
+expression = ""
+equation = StringVar()
+display = Entry(window, textvariable=equation, width=20, justify='right')
+display.grid(row=0, column=0, columnspan=4, padx=5, pady=5)
+
+
+def press(num):
+         global expression
+         expression = expression + str(num)
+         equation.set(expression)
+         print(num)
+Button1=Button(window,text=1,command=lambda: press(1)).grid(row=1,column=0)
+Button2=Button(window,text=2,command=lambda: press(2)).grid(row=1,column=1)
+Button3=Button(window,text=3,command=lambda: press(3)).grid(row=1,column=2)
+Button4=Button(window,text=4,command=lambda: press(4)).grid(row=2,column=0)
+Button5=Button(window,text=5,command=lambda: press(5)).grid(row=2,column=1)
+Button6=Button(window,text=6,command=lambda: press(6)).grid(row=2,column=2)
+Button7=Button(window,text=7,command=lambda: press(7)).grid(row=3,column=0)  
+Button8=Button(window,text=8,command=lambda: press(8)).grid(row=3,column=1)
+Button9=Button(window,text=9,command=lambda: press(9)).grid(row=3,column=2)
+Button0=Button(window,text=0,command=lambda: press(0)).grid(row=4,column=0)
+Buttonadd=Button(window,text="+",command=lambda: press("+")).grid(row=1,column=3)
+Buttonsub=Button(window,text="-",command=lambda: press("-")).grid(row=2,column=3)
+Buttonmul=Button(window,text="*",command=lambda: press("*")).grid(row=3,column=3)
+Buttondiv=Button(window,text="/",command=lambda: press("/")).grid(row=4,column=3)  
+def equal():
+         global expression
+         try:
+                  result=str(eval(expression))
+                  equation.set(result)
+                  expression = result
+         except:
+                   equation.set("error")
+                   expression = ""
+Buttonequ=Button(window,text="=",command=equal).grid(row=4,column=1)
+def clear():
+         global expression
+         expression = ""
+         equation.set("")
+Buttonclr=Button(window,text="C",command=clear).grid(row=4,column=4)
+def backspace():
+         global expression
+         expression=expression[:-1]
+         equation.set(expression)
+Buttonback=Button(window,text="x",command=backspace).grid(row=4,column=2)
+window.title("Calculator")
+window.geometry("300x200")
+window.mainloop()
